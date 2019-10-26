@@ -7,16 +7,29 @@
 iarduino_RTC time(RTC_DS1307);
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 DHT dht(2, DHT11);
+
+byte customChar[] = {
+  B11100,
+  B10100,
+  B11100,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000
+};
+
 void setup()
 {
   Serial.begin(9600);
   lcd.init();
   dht.begin();
   lcd.backlight();
+  lcd.createChar(0, customChar);
   delay(300);
     Serial.begin(9600);
     time.begin();
-    //time.settime(0,33,19,26,4,19,5);  // 0  сек, 51 мин, 21 час, 27, октября, 2015 года, вторник
+    //time.settime(0,28,9,26,10,19,6);  // 0  сек, 51 мин, 21 час, 27, октября, 2015 года, вторник
 }
 
 void loop()
@@ -34,7 +47,8 @@ Serial.print((String)", Temperature " + t+"\n");
 //lcd.print((String)"VLAZHNOST " + h);
 
 lcd.setCursor(0,1);
-lcd.print((String)"Temp " + t);
+lcd.print(t);
+lcd.write(0);
 lcd.setCursor(0,0);
 //if(millis()%1000==0){ // если прошла 1 секунда
       lcd.print(time.gettime("d-m-Y,H:i:s,D")); // выводим время
