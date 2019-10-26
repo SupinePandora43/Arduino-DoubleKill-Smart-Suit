@@ -27,31 +27,31 @@ void setup()
   lcd.backlight();
   lcd.createChar(0, customChar);
   delay(300);
-    Serial.begin(9600);
-    time.begin();
-    //time.settime(0,28,9,26,10,19,6);  // 0  сек, 51 мин, 21 час, 27, октября, 2015 года, вторник
+  Serial.begin(9600);
+  time.begin();
+  //time.settime(0,28,9,26,10,19,6);  // 0  сек, 51 мин, 21 час, 27, октября, 2015 года, вторник
 }
 
 void loop()
 {
-delay(2000);
-float h = dht.readHumidity();
-float t = dht.readTemperature();
-if (isnan(h) || isnan(t)) {
-Serial.println("Не удается считать показания");
-return;
-}
-Serial.print((String)"VLAZHNOST " + h);
-Serial.print((String)", Temperature " + t+"\n");
-//lcd.setCursor(0,0);
-//lcd.print((String)"VLAZHNOST " + h);
+  delay(2000);
+  float h = dht.readHumidity();
+  float t = dht.readTemperature();
+  if (isnan(h) || isnan(t)) {
+    Serial.println("Не удается считать показания");
+    return;
+  }
+  Serial.print((String)"VLAZHNOST " + h);
+  Serial.print((String)", Temperature " + t + "\n");
+  //lcd.setCursor(0,0);
+  //lcd.print((String)"VLAZHNOST " + h);
 
-lcd.setCursor(0,1);
-lcd.print(t);
-lcd.write(0);
-lcd.setCursor(0,0);
-//if(millis()%1000==0){ // если прошла 1 секунда
-      lcd.print(time.gettime("d-m-Y,H:i:s,D")); // выводим время
-      delay(1); // приостанавливаем на 1 мс, чтоб не выводить время несколько раз за 1мс
-//}
+  lcd.setCursor(0, 1);
+  lcd.print(t);
+  lcd.write(0);
+  lcd.setCursor(0, 0);
+  //if(millis()%1000==0){ // если прошла 1 секунда
+  lcd.print(time.gettime("d-m-Y,H:i:s,D")); // выводим время
+  delay(1); // приостанавливаем на 1 мс, чтоб не выводить время несколько раз за 1мс
+  //}
 }
