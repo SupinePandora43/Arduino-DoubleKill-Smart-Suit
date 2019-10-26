@@ -1,4 +1,5 @@
 #include <Adafruit_Sensor.h>
+#include <math.h>
 #include <DHT.h>
 #include <DHT_U.h>
 #include <Wire.h>
@@ -29,7 +30,7 @@ void setup()
   delay(300);
   Serial.begin(9600);
   time.begin();
-  //time.settime(0,28,9,26,10,19,6);  // 0  сек, 51 мин, 21 час, 27, октября, 2015 года, вторник
+  //time.settime(0,58,9,26,10,19,6);  // 0  сек, 51 мин, 21 час, 27, октября, 2015 года, вторник
 }
 
 void loop()
@@ -49,6 +50,7 @@ void loop()
   lcd.setCursor(0, 1);
   lcd.print(t);
   lcd.write(0);
+  lcd.print((String)"," +round(h)+(String) "%");
   lcd.setCursor(0, 0);
   //if(millis()%1000==0){ // если прошла 1 секунда
   lcd.print(time.gettime("d-m-Y,H:i:s,D")); // выводим время
